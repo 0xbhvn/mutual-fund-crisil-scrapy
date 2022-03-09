@@ -51,10 +51,10 @@ class CrisilSpider(scrapy.Spider):
             fund_name = fund.xpath(".//td[1]/a/text()").get()
             crisil_rank = fund.xpath(".//td[4]/span/text()").get()
 
-            if fund.xpath(".//td[4]/span/text()").get() == '-':
+            if crisil_rank == '-':
                 crisil_rank = 0
             else:
-                crisil_rank = int(fund.xpath(".//td[4]/span/text()").get())
+                crisil_rank = int(crisil_rank)
 
             level_1_category = fund.xpath(
                 "/html/body/section[1]/div/div/div[1]/div[1]/div/div/div[1]/h4/div[1]/div/ul/li[@class='tabactive active']/a/text()").get()
