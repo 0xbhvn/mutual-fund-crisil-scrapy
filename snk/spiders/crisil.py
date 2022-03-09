@@ -6,9 +6,11 @@ class CrisilSpider(scrapy.Spider):
     allowed_domains = ['moneycontrol.com']
 
     def start_requests(self):
-        start_urls = ['https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/index-fundsetfs.html',
+        start_urls = ['https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/fund-of-funds.html',
+                      'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/index-fundsetfs.html',
                       'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/multi-cap-fund.html',
                       'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/large-cap-fund.html',
+                      'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/flexi-cap-fund.html',
                       'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/large-and-mid-cap-fund.html',
                       'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/mid-cap-fund.html',
                       'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/small-cap-fund.html',
@@ -20,6 +22,7 @@ class CrisilSpider(scrapy.Spider):
                       'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/contra-fund.html',
                       'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/aggressive-hybrid-fund.html',
                       'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/arbitrage-fund.html',
+                      'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/fixed-maturity-plans---hybrid.html',
                       'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/dynamic-asset-allocation-or-balanced-advantage.html',
                       'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/equity-savings.html',
                       'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/fixed-maturity-plans-hybrid.html',
@@ -38,7 +41,16 @@ class CrisilSpider(scrapy.Spider):
                       'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/dynamic-bond-fund.html',
                       'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/medium-to-long-duration-fund.html',
                       'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/gilt-fund.html',
-                      'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/long-duration-fund.html']
+                      'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/gilt-fund-with-10-year-constant-duration.html',
+                      'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/banking-and-psu-fund.html',
+                      'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/fixed-maturity-plans---debt.html',
+                      'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/interval-plans.html',
+                      'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/liquid-fund.html',
+                      'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/long-duration-fund.html',
+                      'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/overnight-fund.html',
+                      'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/childrens-fund.html',
+                      'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/retirement-fund.html',
+                      'https://www.moneycontrol.com/mutual-funds/performance-tracker/returns/investment-cum-insurance.html']
 
         for url in start_urls:
             yield scrapy.Request(url=url, callback=self.parse)
