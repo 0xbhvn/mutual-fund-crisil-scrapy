@@ -1,4 +1,5 @@
 import scrapy
+from datetime import datetime
 
 
 class CommoditySpider(scrapy.Spider):
@@ -17,8 +18,11 @@ class CommoditySpider(scrapy.Spider):
 
         for mcx_commodity in mcx_commodities:
             commodity = mcx_commodity.xpath(".//td/a/text()").extract_first()
+
             date = mcx_commodity.xpath(
                 ".//td/a/div[@class='date']/text()").extract_first()
+            date = datetime.strptime(date, '%d %b %Y').strftime('%Y-%m-%d')
+
             price = mcx_commodity.xpath(".//td[2]/text()").extract_first()
             change = mcx_commodity.xpath(".//td[3]/text()").extract_first()
             pc_change = mcx_commodity.xpath(".//td[4]/text()").extract_first()
@@ -39,6 +43,8 @@ class CommoditySpider(scrapy.Spider):
             commodity = ncdex_commodity.xpath(".//td/a/text()").extract_first()
             date = ncdex_commodity.xpath(
                 ".//td/a/div[@class='date']/text()").extract_first()
+            date = datetime.strptime(date, '%d %b %Y').strftime('%Y-%m-%d')
+
             price = ncdex_commodity.xpath(".//td[2]/text()").extract_first()
             change = ncdex_commodity.xpath(".//td[3]/text()").extract_first()
             pc_change = ncdex_commodity.xpath(

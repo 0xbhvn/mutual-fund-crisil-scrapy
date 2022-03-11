@@ -35,6 +35,9 @@ class SnkPipeline:
             self.store_ipo(item)
         if spider.name == 'forex':
             self.store_forex(item)
+        if spider.name == 'commodity':
+            # pass
+            self.store_commodity(item)
         return item
 
     def store_fund(self, item):
@@ -82,5 +85,26 @@ class SnkPipeline:
             item['cur_name'],
             item['cur_code'],
             item['cur_rate'])
+        )
+        self.conn.commit()
+
+    def store_commodity(self, item):
+        self.cur.execute("""
+            INSERT INTO commodities (
+                 commodity, 
+                 type, 
+                 date,
+                 price,
+                 change,
+                 pc_change
+            ) VALUES ( %s, %s, %s, %s, %s, %s );
+        """, (
+            item['commodity'],
+            item['type'],
+            item['date'],
+            item['price'],
+            item['change'],
+            item['pc_change'],
+        )
         )
         self.conn.commit()
