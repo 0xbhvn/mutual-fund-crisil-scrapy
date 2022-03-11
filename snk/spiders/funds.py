@@ -1,8 +1,8 @@
 import scrapy
 
 
-class CrisilSpider(scrapy.Spider):
-    name = 'crisil'
+class FundsSpider(scrapy.Spider):
+    name = 'funds'
     allowed_domains = ['moneycontrol.com']
 
     def start_requests(self):
@@ -68,15 +68,15 @@ class CrisilSpider(scrapy.Spider):
             else:
                 crisil_rank = int(crisil_rank)
 
-            level_1_category = fund.xpath(
+            category = fund.xpath(
                 "/html/body/section[1]/div/div/div[1]/div[1]/div/div/div[1]/h4/div[1]/div/ul/li[@class='tabactive active']/a/text()").get()
-            level_2_category = fund.xpath(".//td[3]/text()").get()
-            level_3_category = fund.xpath(".//td[2]/text()").get()
+            subcategory = fund.xpath(".//td[3]/text()").get()
+            type = fund.xpath(".//td[2]/text()").get()
 
             yield {
                 'fund_name': fund_name,
                 'crisil_rank': crisil_rank,
-                'level_1_category': level_1_category,
-                'level_2_category': level_2_category,
-                'level_3_category': level_3_category,
+                'category': category,
+                'subcategory': subcategory,
+                'type': type,
             }
