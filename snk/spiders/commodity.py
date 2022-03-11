@@ -23,9 +23,12 @@ class CommoditySpider(scrapy.Spider):
                 ".//td/a/div[@class='date']/text()").extract_first()
             date = datetime.strptime(date, '%d %b %Y').strftime('%Y-%m-%d')
 
-            price = mcx_commodity.xpath(".//td[2]/text()").extract_first()
-            change = mcx_commodity.xpath(".//td[3]/text()").extract_first()
-            pc_change = mcx_commodity.xpath(".//td[4]/text()").extract_first()
+            price = float(mcx_commodity.xpath(
+                ".//td[2]/text()").extract_first().replace(',', ''))
+            change = float(mcx_commodity.xpath(
+                ".//td[3]/text()").extract_first().replace(',', ''))
+            pc_change = float(mcx_commodity.xpath(
+                ".//td[4]/text()").extract_first().replace(',', ''))
 
             yield {
                 "commodity": commodity,
@@ -45,10 +48,12 @@ class CommoditySpider(scrapy.Spider):
                 ".//td/a/div[@class='date']/text()").extract_first()
             date = datetime.strptime(date, '%d %b %Y').strftime('%Y-%m-%d')
 
-            price = ncdex_commodity.xpath(".//td[2]/text()").extract_first()
-            change = ncdex_commodity.xpath(".//td[3]/text()").extract_first()
-            pc_change = ncdex_commodity.xpath(
-                ".//td[4]/text()").extract_first()
+            price = float(ncdex_commodity.xpath(
+                ".//td[2]/text()").extract_first().replace(',', ''))
+            change = float(ncdex_commodity.xpath(
+                ".//td[3]/text()").extract_first().replace(',', ''))
+            pc_change = float(ncdex_commodity.xpath(
+                ".//td[4]/text()").extract_first().replace(',', ''))
 
             yield {
                 "commodity": commodity,
