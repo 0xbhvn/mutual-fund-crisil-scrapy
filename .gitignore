@@ -1,0 +1,8 @@
+# virtualenv folder
+venv/
+
+# pycache folders
+snk/__pycache__/
+snk/spiders/__pycache__/
+
+.DS_Store

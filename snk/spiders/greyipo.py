@@ -13,7 +13,6 @@ class GreyipoSpider(scrapy.Spider):
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
-        pass
         ipos_gmp = response.xpath(
             "/html/body/div[1]/div[3]/div[2]/div/div[2]/div[2]/div/div/div/div/div[4]/div[1]/div/div/table[1]/tbody/tr")
         ipos_kostak_sauda = response.xpath(
