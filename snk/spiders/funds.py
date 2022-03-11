@@ -57,11 +57,11 @@ class FundsSpider(scrapy.Spider):
 
     def parse(self, response):
         funds = response.xpath(
-            "/html/body/section[2]/div/div/div[2]/div/div[4]/div/table/tbody/tr")
+            "//table[@id='dataTableId']/tbody/tr")
 
         for fund in funds:
-            fund_name = fund.xpath(".//td[1]/a/text()").get()
-            crisil_rank = fund.xpath(".//td[4]/span/text()").get()
+            fund_name = fund.xpath(".//td[1]/a/text()").extract_first()
+            crisil_rank = fund.xpath(".//td[4]/span/text()").extract_first()
 
             if crisil_rank == '-':
                 crisil_rank = 0
@@ -69,9 +69,9 @@ class FundsSpider(scrapy.Spider):
                 crisil_rank = int(crisil_rank)
 
             category = fund.xpath(
-                "/html/body/section[1]/div/div/div[1]/div[1]/div/div/div[1]/h4/div[1]/div/ul/li[@class='tabactive active']/a/text()").get()
-            subcategory = fund.xpath(".//td[3]/text()").get()
-            type = fund.xpath(".//td[2]/text()").get()
+                "/html/body/section[1]/div/div/div[1]/div[1]/div/div/div[1]/h4/div[1]/div/ul/li[@class='tabactive active']/a/text()").extract_first()
+            subcategory = fund.xpath(".//td[3]/text()").extract_first()
+            type = fund.xpath(".//td[2]/text()").extract_first()
 
             yield {
                 'fund_name': fund_name,
